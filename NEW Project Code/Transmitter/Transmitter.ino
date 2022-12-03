@@ -10,12 +10,12 @@ String charToBin(int number)
   return binNum;
 }
 
-int zeroLength = 8;  // 50  // 10
-int oneLength = zeroLength*3;
+int zeroLength = 500;  // 50  // 10 // 8  // 4  // 1  // 500
+int oneLength = zeroLength*2;
 
 void setup() {
   pinMode(13, OUTPUT);
-  Serial.begin(9600);
+  Serial.begin(115200);
 }
 
 void loop() {
@@ -23,7 +23,7 @@ void loop() {
   if(Serial.available()){
     ch = Serial.read();
     flashLaser(charToBin(ch));
-    delay(zeroLength*2);
+    delayMicroseconds(zeroLength*3);
   }
 }
 
@@ -41,15 +41,15 @@ void flashLaser(String BinaryChar)
 void zero()
 {
   digitalWrite(13, HIGH);
-  delay(zeroLength);
+  delayMicroseconds(zeroLength);
   digitalWrite(13, LOW);
-  delay(zeroLength);
+  delayMicroseconds(zeroLength);
 }
 
 void one()
 {
   digitalWrite(13, HIGH);
-  delay(oneLength);
+  delayMicroseconds(oneLength);
   digitalWrite(13, LOW);
-  delay(zeroLength);
+  delayMicroseconds(zeroLength);
 } 

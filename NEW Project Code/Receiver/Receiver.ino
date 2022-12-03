@@ -3,12 +3,12 @@
 int val = 0;
 int ctrHigh = 0;
 int ctrLow = 0;
-int zeroLen = 64;  // 400 // 80 
+int zeroLen = 4;  // 400 // 80 // 64  // 32 // 8  // 4
 String toPrint = "";
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("Starting...");
 }
 
@@ -16,7 +16,7 @@ void loop()
 {
   val = analogRead(A4);
 
-  if (val <= 40) {
+  if (val >= 30) {
     ctrHigh++;
     ctrLow = 0;
   }
@@ -31,7 +31,7 @@ void loop()
       toPrint += "1";
     } 
     else {
-      if(ctrLow == zeroLen*2){
+      if(ctrLow == zeroLen*3){
         long dec = strtol(toPrint.c_str(), NULL, 2);
         Serial.print(char(dec));
         toPrint = "";
